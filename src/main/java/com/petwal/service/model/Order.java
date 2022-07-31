@@ -1,6 +1,5 @@
-package com.petwal.repository.model;
+package com.petwal.service.model;
 
-import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -8,86 +7,49 @@ import java.util.Objects;
 import static com.petwal.util.Validation.checkNotEmpty;
 import static com.petwal.util.Validation.checkNotNull;
 
-@Entity
-public class OrderEntity {
+public class Order {
 
-    @Id
     private String id;
     private Instant created;
     private Instant started;
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<PickEntity> picks;
+    private List<Pick> picks;
     private Integer nextPick;
     private Boolean done;
 
-    public OrderEntity() {
+    private Order() {
     }
 
-    public OrderEntity(final String id, final Instant created, final Instant started, final List<PickEntity> picks, final Integer nextPick, final Boolean done) {
-        this.id = checkNotNull(id, "id");
-        this.created = checkNotNull(created, "created");
-        this.started = checkNotNull(started, "started");
-        this.picks = checkNotEmpty(picks, "pics");
-        this.nextPick = checkNotNull(nextPick, "nextPick");
-        this.done = checkNotNull(done, "done");
-    }
-
-    private OrderEntity(final Builder builder) {
-        setId(builder.id);
-        setCreated(builder.created);
-        setStarted(builder.started);
-        setPicks(builder.picks);
-        setNextPick(builder.nextPick);
-        setDone(builder.done);
+    private Order(final Builder builder) {
+        id = checkNotNull(builder.id, "id");
+        created = checkNotNull(builder.created, "created");
+        started = checkNotNull(builder.started, "started");
+        picks = checkNotEmpty(builder.picks, "picks");
+        nextPick = checkNotNull(builder.nextPick, "nextPick");
+        done = checkNotNull(builder.done, "done");
     }
 
     public String getId() {
         return id;
     }
 
-    private void setId(final String id) {
-        this.id = id;
-    }
-
     public Instant getCreated() {
         return created;
-    }
-
-    private void setCreated(final Instant created) {
-        this.created = created;
     }
 
     public Instant getStarted() {
         return started;
     }
 
-    private void setStarted(final Instant started) {
-        this.started = started;
-    }
-
-    public List<PickEntity> getPicks() {
+    public List<Pick> getPicks() {
         return picks;
-    }
-
-    private void setPicks(final List<PickEntity> picks) {
-        this.picks = picks;
     }
 
     public Integer getNextPick() {
         return nextPick;
     }
 
-    private void setNextPick(final Integer nextPick) {
-        this.nextPick = nextPick;
-    }
-
     public Boolean getDone() {
         return done;
-    }
-
-    private void setDone(final Boolean done) {
-        this.done = done;
     }
 
     public static Builder builder() {
@@ -98,7 +60,7 @@ public class OrderEntity {
         private String id;
         private Instant created;
         private Instant started;
-        private List<PickEntity> picks;
+        private List<Pick> picks;
         private Integer nextPick;
         private Boolean done;
 
@@ -120,7 +82,7 @@ public class OrderEntity {
             return this;
         }
 
-        public Builder picks(final List<PickEntity> picks) {
+        public Builder picks(final List<Pick> picks) {
             this.picks = picks;
             return this;
         }
@@ -135,8 +97,8 @@ public class OrderEntity {
             return this;
         }
 
-        public OrderEntity build() {
-            return new OrderEntity(this);
+        public Order build() {
+            return new Order(this);
         }
     }
 
@@ -144,8 +106,8 @@ public class OrderEntity {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final OrderEntity that = (OrderEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(created, that.created) && Objects.equals(started, that.started) && Objects.equals(picks, that.picks) && Objects.equals(nextPick, that.nextPick) && Objects.equals(done, that.done);
+        final Order order = (Order) o;
+        return Objects.equals(id, order.id) && Objects.equals(created, order.created) && Objects.equals(started, order.started) && Objects.equals(picks, order.picks) && Objects.equals(nextPick, order.nextPick) && Objects.equals(done, order.done);
     }
 
     @Override
@@ -155,7 +117,7 @@ public class OrderEntity {
 
     @Override
     public String toString() {
-        return "OrderEntity{" +
+        return "Order{" +
                 "id='" + id + '\'' +
                 ", created=" + created +
                 ", started=" + started +

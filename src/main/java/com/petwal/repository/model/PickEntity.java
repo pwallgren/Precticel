@@ -25,7 +25,8 @@ public class PickEntity {
     private PickEntity() {
     }
 
-    private PickEntity(final Long id, final ItemEntity item, final OrderEntity order, final Integer quantity, final Integer picked, final Boolean done) {
+    private PickEntity(final Long id, final ItemEntity item, final OrderEntity order, final Integer quantity,
+                       final Integer picked, final Boolean done) {
         this.id = checkNotNull(id, "pickId");
         this.item = checkNotNull(item, "item");
         this.order = checkNotNull(order, "order");
@@ -145,7 +146,8 @@ public class PickEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final PickEntity that = (PickEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(item, that.item) && Objects.equals(order, that.order) && Objects.equals(quantity, that.quantity) && Objects.equals(picked, that.picked) && Objects.equals(done, that.done);
+        return Objects.equals(id, that.id) && Objects.equals(item, that.item) && Objects.equals(order, that.order)
+                && Objects.equals(quantity, that.quantity) && Objects.equals(picked, that.picked) && Objects.equals(done, that.done);
     }
 
     @Override

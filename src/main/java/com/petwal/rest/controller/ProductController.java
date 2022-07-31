@@ -1,4 +1,4 @@
-package com.petwal.controller;
+package com.petwal.rest.controller;
 
 import com.petwal.repository.model.ItemEntity;
 import com.petwal.repository.model.ItemTypeEntity;
@@ -20,7 +20,7 @@ public class ProductController {
         productService.saveProduct(ItemEntity.builder()
                 .name("Kudde 1000")
                 .id("2459AB")
-                .productType(ItemTypeEntity.of("13535AA", "KUDDE"))
+                .itemType(ItemTypeEntity.of("13535AA", "KUDDE"))
                 .build());
         return "Hello WOrld!";
     }

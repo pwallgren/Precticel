@@ -13,22 +13,22 @@ public class ItemEntity {
     private String name;
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
-    private ItemTypeEntity productType;
+    private ItemTypeEntity itemType;
 
 
     private ItemEntity() {
     }
 
-    private ItemEntity(final String id, final String name, final ItemTypeEntity productType) {
+    private ItemEntity(final String id, final String name, final ItemTypeEntity itemType) {
         this.id = checkNotNull(id, "id");
         this.name = checkNotNull(name, "name");
-        this.productType = checkNotNull(productType, "productType");
+        this.itemType = checkNotNull(itemType, "itemType");
     }
 
     private ItemEntity(final Builder builder) {
         setId(builder.id);
         setName(builder.name);
-        setProductType(builder.productType);
+        setItemType(builder.itemType);
     }
 
     public String getId() {
@@ -47,12 +47,12 @@ public class ItemEntity {
         this.name = name;
     }
 
-    public ItemTypeEntity getProductType() {
-        return productType;
+    public ItemTypeEntity getItemType() {
+        return itemType;
     }
 
-    private void setProductType(final ItemTypeEntity productType) {
-        this.productType = productType;
+    private void setItemType(final ItemTypeEntity itemType) {
+        this.itemType = itemType;
     }
 
     public static Builder builder() {
@@ -62,7 +62,7 @@ public class ItemEntity {
     public static final class Builder {
         private String id;
         private String name;
-        private ItemTypeEntity productType;
+        private ItemTypeEntity itemType;
 
         private Builder() {
         }
@@ -77,8 +77,8 @@ public class ItemEntity {
             return this;
         }
 
-        public Builder productType(final ItemTypeEntity productType) {
-            this.productType = productType;
+        public Builder itemType(final ItemTypeEntity itemType) {
+            this.itemType = itemType;
             return this;
         }
 
@@ -92,12 +92,12 @@ public class ItemEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ItemEntity that = (ItemEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(productType, that.productType);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(itemType, that.itemType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, productType);
+        return Objects.hash(id, name, itemType);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class ItemEntity {
         return "ProductEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", productType=" + productType +
+                ", itemType=" + itemType +
                 '}';
     }
 }
