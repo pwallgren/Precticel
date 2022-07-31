@@ -1,17 +1,17 @@
 package com.petwal.service;
 
-import com.petwal.repository.ProductRepository;
-import com.petwal.repository.model.Product;
+import com.petwal.repository.ItemRepository;
+import com.petwal.repository.model.ItemEntity;
 
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private ItemRepository itemRepository;
 
-    public ProductService(final ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductService(final ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
-    public void saveProduct(final Product product) {
-        productRepository.save(product);
+    public void saveProduct(final ItemEntity itemEntity) {
+        itemRepository.save(itemEntity);
     }
 }

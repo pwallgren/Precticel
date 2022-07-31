@@ -1,6 +1,7 @@
 package com.petwal.controller;
 
-import com.petwal.repository.model.Product;
+import com.petwal.repository.model.ItemEntity;
+import com.petwal.repository.model.ItemTypeEntity;
 import com.petwal.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,11 @@ public class ProductController {
 
     @GetMapping("/")
     public String createProduct() {
-        productService.saveProduct(new Product("Petter"));
+        productService.saveProduct(ItemEntity.builder()
+                .name("Kudde 1000")
+                .id("2459AB")
+                .productType(ItemTypeEntity.of("13535AA", "KUDDE"))
+                .build());
         return "Hello WOrld!";
     }
 }
