@@ -7,6 +7,7 @@ public class ApiOrderRequest implements Serializable {
 
     private String orderId;
     private String pickId;
+    private String deviceId;
     private Integer amount;
 
     private ApiOrderRequest() {
@@ -28,6 +29,14 @@ public class ApiOrderRequest implements Serializable {
         this.pickId = pickId;
     }
 
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    private void setDeviceId(final String deviceId) {
+        this.deviceId = deviceId;
+    }
+
     public Integer getAmount() {
         return amount;
     }
@@ -41,12 +50,12 @@ public class ApiOrderRequest implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ApiOrderRequest that = (ApiOrderRequest) o;
-        return Objects.equals(orderId, that.orderId) && Objects.equals(pickId, that.pickId) && Objects.equals(amount, that.amount);
+        return Objects.equals(orderId, that.orderId) && Objects.equals(pickId, that.pickId) && Objects.equals(deviceId, that.deviceId) && Objects.equals(amount, that.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, pickId, amount);
+        return Objects.hash(orderId, pickId, deviceId, amount);
     }
 
     @Override
@@ -54,6 +63,7 @@ public class ApiOrderRequest implements Serializable {
         return "ApiOrderRequest{" +
                 "orderId='" + orderId + '\'' +
                 ", pickId='" + pickId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
                 ", amount=" + amount +
                 '}';
     }

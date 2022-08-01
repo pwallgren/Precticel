@@ -56,7 +56,7 @@ public class ItemTypeEntity {
 
     @Override
     public String toString() {
-        return "ProductTypeEntity{" +
+        return "ItemTypeEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';

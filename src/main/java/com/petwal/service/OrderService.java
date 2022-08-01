@@ -19,11 +19,15 @@ public class OrderService {
                 .map(EntityToDomain::convert);
     }
 
-    public void pickOrderItem(final String orderId, final String pickId, final int amount) {
-        orderRepository.pickOrderItem(orderId, pickId, amount);
+    public void pickOrderItem(final String orderId, final String pickId, final String deviceId, final int amount) {
+        orderRepository.pickOrderItem(orderId, pickId, deviceId, amount);
     }
 
-    public void startNewOrder(final String deviceId) {
-        orderRepository.startNewOrder(deviceId);
+    public void startRandomOrder(final String deviceId) {
+        orderRepository.startRandomOrder(deviceId);
+    }
+
+    public void startSpecificOrder(final String deviceId, final String orderId) {
+        orderRepository.startSpecificOrder(deviceId, orderId);
     }
 }

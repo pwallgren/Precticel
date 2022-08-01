@@ -2,7 +2,7 @@ package com.petwal.rest.service;
 
 import com.petwal.rest.converter.DomainToApi;
 import com.petwal.rest.model.ApiOrder;
-import com.petwal.rest.model.request.ApiDeviceRequest;
+import com.petwal.rest.model.request.ApiStartOrderRequest;
 import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.service.OrderService;
 
@@ -22,11 +22,15 @@ public class ApiOrderService {
     }
 
     public void pickOrderItem(final ApiOrderRequest request) {
-        orderService.pickOrderItem(request.getOrderId(), request.getPickId(), request.getAmount());
+        orderService.pickOrderItem(request.getOrderId(), request.getPickId(), request.getDeviceId(), request.getAmount());
     }
 
-    public void startNewOrder(final ApiDeviceRequest request) {
-        orderService.startNewOrder(request.getDeviceId());
+    public void startNewOrder(final ApiStartOrderRequest request) {
+        orderService.startRandomOrder(request.getDeviceId());
+    }
+
+    public void startSpecificOrder(final ApiStartOrderRequest request) {
+        orderService.startSpecificOrder(request.getDeviceId(), request.getOrderId());
     }
 
 }

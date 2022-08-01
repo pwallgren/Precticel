@@ -1,7 +1,7 @@
 package com.petwal.rest.controller;
 
 import com.petwal.rest.model.ApiOrder;
-import com.petwal.rest.model.request.ApiDeviceRequest;
+import com.petwal.rest.model.request.ApiStartOrderRequest;
 import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,15 @@ public class OrderController {
         apiOrderService.pickOrderItem(apiOrderRequest);
     }
 
-    @PostMapping("/new")
-    public void startNewOrder(@RequestBody final ApiDeviceRequest deviceRequest) {
+    @PostMapping("/start-random")
+    public void startNewOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
 
-        apiOrderService.startNewOrder(deviceRequest);
+        apiOrderService.startNewOrder(startOrderRequest);
+    }
+
+    @PostMapping("/start-specific")
+    public void startSpecificOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
+
+        apiOrderService.startSpecificOrder(startOrderRequest);
     }
 }
