@@ -15,8 +15,11 @@ public class OrderService {
     }
 
     public Optional<Order> getOrder(final String orderId) {
-        orderRepository.pickOrderItem("123AB", "1", 1);
         return orderRepository.findById(orderId)
                 .map(EntityToDomain::convert);
+    }
+
+    public void pickOrderItem(final String orderId, final String pickId, final int amount) {
+        orderRepository.pickOrderItem(orderId, pickId, amount);
     }
 }

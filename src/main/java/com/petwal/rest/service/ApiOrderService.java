@@ -2,6 +2,7 @@ package com.petwal.rest.service;
 
 import com.petwal.rest.converter.DomainToApi;
 import com.petwal.rest.model.ApiOrder;
+import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.service.OrderService;
 
 import java.util.Optional;
@@ -17,6 +18,10 @@ public class ApiOrderService {
     public Optional<ApiOrder> getOrder(final String orderId) {
         return orderService.getOrder(orderId)
                 .map(DomainToApi::convert);
+    }
+
+    public void pickOrderItem(final ApiOrderRequest request) {
+        orderService.pickOrderItem(request.getOrderId(), request.getPickId(), request.getAmount());
     }
 
 }

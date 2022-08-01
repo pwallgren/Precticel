@@ -1,6 +1,7 @@
 package com.petwal.rest.controller;
 
 import com.petwal.rest.model.ApiOrder;
+import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping("/pick")
-    public void pick(@RequestParam final String orderId, @RequestParam final String itemId, @RequestParam final int quantity) {
-
+    public void pick(@RequestBody final ApiOrderRequest apiOrderRequest) {
+        apiOrderService.pickOrderItem(apiOrderRequest);
     }
 }
