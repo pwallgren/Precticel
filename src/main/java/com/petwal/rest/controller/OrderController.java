@@ -1,7 +1,7 @@
 package com.petwal.rest.controller;
 
-import com.petwal.service.OrderService;
-import com.petwal.service.model.Order;
+import com.petwal.rest.model.ApiOrder;
+import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "order")
 public class OrderController {
 
-    private final OrderService orderService;
+    private final ApiOrderService apiOrderService;
 
-    public OrderController(final OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(final ApiOrderService apiOrderService) {
+        this.apiOrderService = apiOrderService;
     }
 
     @GetMapping
-    public ResponseEntity<Order> getOrder(@RequestParam final String orderId) {
+    public ResponseEntity<ApiOrder> getOrder(@RequestParam final String orderId) {
 
-        return orderService.getOrder(orderId)
+        return apiOrderService.getOrder(orderId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

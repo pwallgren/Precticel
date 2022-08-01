@@ -1,25 +1,19 @@
-package com.petwal.repository.model;
+package com.petwal.rest.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 import static com.petwal.util.Validation.checkNotNull;
 
-@Entity
-public class ItemEntity {
+public class ApiItem {
 
-    @Id
     private String id;
     private String name;
-    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ItemTypeEntity itemType;
+    private ApiItemType itemType;
 
-
-    private ItemEntity() {
+    private ApiItem() {
     }
 
-    private ItemEntity(final Builder builder) {
+    private ApiItem(final Builder builder) {
         this.id = checkNotNull(builder.id, "id");
         this.name = checkNotNull(builder.name, "name");
         this.itemType = checkNotNull(builder.itemType, "itemType");
@@ -41,11 +35,11 @@ public class ItemEntity {
         this.name = name;
     }
 
-    public ItemTypeEntity getItemType() {
+    public ApiItemType getItemType() {
         return itemType;
     }
 
-    private void setItemType(final ItemTypeEntity itemType) {
+    public void setItemType(final ApiItemType itemType) {
         this.itemType = itemType;
     }
 
@@ -56,7 +50,7 @@ public class ItemEntity {
     public static final class Builder {
         private String id;
         private String name;
-        private ItemTypeEntity itemType;
+        private ApiItemType itemType;
 
         private Builder() {
         }
@@ -71,13 +65,13 @@ public class ItemEntity {
             return this;
         }
 
-        public Builder itemType(final ItemTypeEntity itemType) {
+        public Builder itemType(final ApiItemType itemType) {
             this.itemType = itemType;
             return this;
         }
 
-        public ItemEntity build() {
-            return new ItemEntity(this);
+        public ApiItem build() {
+            return new ApiItem(this);
         }
     }
 
@@ -85,8 +79,8 @@ public class ItemEntity {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final ItemEntity that = (ItemEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(itemType, that.itemType);
+        final ApiItem apiItem = (ApiItem) o;
+        return Objects.equals(id, apiItem.id) && Objects.equals(name, apiItem.name) && Objects.equals(itemType, apiItem.itemType);
     }
 
     @Override
@@ -96,7 +90,7 @@ public class ItemEntity {
 
     @Override
     public String toString() {
-        return "ProductEntity{" +
+        return "ApiItem{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", itemType=" + itemType +
