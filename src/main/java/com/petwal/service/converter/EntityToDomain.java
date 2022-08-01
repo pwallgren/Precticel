@@ -20,8 +20,8 @@ public class EntityToDomain {
                 .picks(convert(orderEntity.getPicks()))
                 .created(orderEntity.getCreated())
                 .started(orderEntity.getStarted())
-                .nextPick(orderEntity.getNextPick())
                 .done(orderEntity.getDone())
+                .deviceId(orderEntity.getDeviceId())
                 .build();
     }
 

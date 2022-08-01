@@ -20,8 +20,8 @@ public class DomainToApi {
                 .picks(convert(order.getPicks()))
                 .created(order.getCreated())
                 .started(order.getStarted())
-                .nextPick(order.getNextPick())
                 .done(order.getDone())
+                .deviceId(order.getDeviceId())
                 .build();
     }
 

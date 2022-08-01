@@ -13,8 +13,8 @@ public class ApiOrder {
     private Instant created;
     private Instant started;
     private List<ApiPick> picks;
-    private Integer nextPick;
     private Boolean done;
+    private String deviceId;
 
     private ApiOrder() {
     }
@@ -24,7 +24,6 @@ public class ApiOrder {
         created = checkNotNull(builder.created, "created");
         started = checkNotNull(builder.started, "started");
         picks = checkNotEmpty(builder.picks, "picks");
-        nextPick = checkNotNull(builder.nextPick, "nextPick");
         done = checkNotNull(builder.done, "done");
     }
 
@@ -60,20 +59,20 @@ public class ApiOrder {
         this.picks = picks;
     }
 
-    public Integer getNextPick() {
-        return nextPick;
-    }
-
-    private void setNextPick(final Integer nextPick) {
-        this.nextPick = nextPick;
-    }
-
     public Boolean getDone() {
         return done;
     }
 
     private void setDone(final Boolean done) {
         this.done = done;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    private void setDeviceId(final String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public static Builder builder() {
@@ -85,8 +84,8 @@ public class ApiOrder {
         private Instant created;
         private Instant started;
         private List<ApiPick> picks;
-        private Integer nextPick;
         private Boolean done;
+        private String deviceId;
 
         private Builder() {
         }
@@ -111,14 +110,15 @@ public class ApiOrder {
             return this;
         }
 
-        public Builder nextPick(final Integer nextPick) {
-            this.nextPick = nextPick;
-            return this;
-        }
-
         public Builder done(final Boolean done) {
             this.done = done;
             return this;
+        }
+
+        public Builder deviceId(final String deviceId) {
+            this.deviceId = deviceId;
+            return this;
+
         }
 
         public ApiOrder build() {
@@ -131,12 +131,12 @@ public class ApiOrder {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ApiOrder apiOrder = (ApiOrder) o;
-        return Objects.equals(id, apiOrder.id) && Objects.equals(created, apiOrder.created) && Objects.equals(started, apiOrder.started) && Objects.equals(picks, apiOrder.picks) && Objects.equals(nextPick, apiOrder.nextPick) && Objects.equals(done, apiOrder.done);
+        return Objects.equals(id, apiOrder.id) && Objects.equals(created, apiOrder.created) && Objects.equals(started, apiOrder.started) && Objects.equals(picks, apiOrder.picks) && Objects.equals(done, apiOrder.done) && Objects.equals(deviceId, apiOrder.deviceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, created, started, picks, nextPick, done);
+        return Objects.hash(id, created, started, picks, done, deviceId);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class ApiOrder {
                 ", created=" + created +
                 ", started=" + started +
                 ", picks=" + picks +
-                ", nextPick=" + nextPick +
                 ", done=" + done +
+                ", deviceId='" + deviceId + '\'' +
                 '}';
     }
 }

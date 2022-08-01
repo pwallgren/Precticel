@@ -13,8 +13,8 @@ public class Order {
     private Instant created;
     private Instant started;
     private List<Pick> picks;
-    private Integer nextPick;
     private Boolean done;
+    private String deviceId;
 
     private Order() {
     }
@@ -24,8 +24,8 @@ public class Order {
         created = checkNotNull(builder.created, "created");
         started = checkNotNull(builder.started, "started");
         picks = checkNotEmpty(builder.picks, "picks");
-        nextPick = checkNotNull(builder.nextPick, "nextPick");
         done = checkNotNull(builder.done, "done");
+        deviceId = checkNotNull(builder.deviceId, "deviceId");
     }
 
     public String getId() {
@@ -44,12 +44,12 @@ public class Order {
         return picks;
     }
 
-    public Integer getNextPick() {
-        return nextPick;
-    }
-
     public Boolean getDone() {
         return done;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
     }
 
     public static Builder builder() {
@@ -61,8 +61,8 @@ public class Order {
         private Instant created;
         private Instant started;
         private List<Pick> picks;
-        private Integer nextPick;
         private Boolean done;
+        private String deviceId;
 
         private Builder() {
         }
@@ -87,13 +87,13 @@ public class Order {
             return this;
         }
 
-        public Builder nextPick(final Integer nextPick) {
-            this.nextPick = nextPick;
+        public Builder done(final Boolean done) {
+            this.done = done;
             return this;
         }
 
-        public Builder done(final Boolean done) {
-            this.done = done;
+        public Builder deviceId(final String deviceId) {
+            this.deviceId = deviceId;
             return this;
         }
 
@@ -107,12 +107,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(created, order.created) && Objects.equals(started, order.started) && Objects.equals(picks, order.picks) && Objects.equals(nextPick, order.nextPick) && Objects.equals(done, order.done);
+        return Objects.equals(id, order.id) && Objects.equals(created, order.created) && Objects.equals(started, order.started) && Objects.equals(picks, order.picks) && Objects.equals(done, order.done) && Objects.equals(deviceId, order.deviceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, created, started, picks, nextPick, done);
+        return Objects.hash(id, created, started, picks, done, deviceId);
     }
 
     @Override
@@ -122,8 +122,8 @@ public class Order {
                 ", created=" + created +
                 ", started=" + started +
                 ", picks=" + picks +
-                ", nextPick=" + nextPick +
                 ", done=" + done +
+                ", deviceId='" + deviceId + '\'' +
                 '}';
     }
 }

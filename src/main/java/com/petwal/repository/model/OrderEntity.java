@@ -18,28 +18,19 @@ public class OrderEntity {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @OneToMany(fetch = FetchType.EAGER)
     private List<PickEntity> picks;
-    private Integer nextPick;
     private Boolean done;
+    private String deviceId;
 
     public OrderEntity() {
     }
 
-    public OrderEntity(final String id, final Instant created, final Instant started, final List<PickEntity> picks, final Integer nextPick, final Boolean done) {
-        this.id = checkNotNull(id, "id");
-        this.created = checkNotNull(created, "created");
-        this.started = checkNotNull(started, "started");
-        this.picks = checkNotEmpty(picks, "pics");
-        this.nextPick = checkNotNull(nextPick, "nextPick");
-        this.done = checkNotNull(done, "done");
-    }
-
-    private OrderEntity(final Builder builder) {
-        setId(builder.id);
-        setCreated(builder.created);
-        setStarted(builder.started);
-        setPicks(builder.picks);
-        setNextPick(builder.nextPick);
-        setDone(builder.done);
+    public OrderEntity(final Builder builder) {
+        this.id = checkNotNull(builder.id, "id");
+        this.created = checkNotNull(builder.created, "created");
+        this.started = checkNotNull(builder.started, "started");
+        this.picks = checkNotEmpty(builder.picks, "pics");
+        this.done = checkNotNull(builder.done, "done");
+        this.deviceId = checkNotNull(builder.deviceId, "deviceId");
     }
 
     public String getId() {
@@ -74,20 +65,20 @@ public class OrderEntity {
         this.picks = picks;
     }
 
-    public Integer getNextPick() {
-        return nextPick;
-    }
-
-    public void setNextPick(final Integer nextPick) {
-        this.nextPick = nextPick;
-    }
-
     public Boolean getDone() {
         return done;
     }
 
     public void setDone(final Boolean done) {
         this.done = done;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(final String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public static Builder builder() {
@@ -99,8 +90,8 @@ public class OrderEntity {
         private Instant created;
         private Instant started;
         private List<PickEntity> picks;
-        private Integer nextPick;
         private Boolean done;
+        private String deviceId;
 
         private Builder() {
         }
@@ -125,13 +116,13 @@ public class OrderEntity {
             return this;
         }
 
-        public Builder nextPick(final Integer nextPick) {
-            this.nextPick = nextPick;
+        public Builder done(final Boolean done) {
+            this.done = done;
             return this;
         }
 
-        public Builder done(final Boolean done) {
-            this.done = done;
+        public Builder deviceId(final String deviceId) {
+            this.deviceId = deviceId;
             return this;
         }
 
@@ -145,12 +136,12 @@ public class OrderEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final OrderEntity that = (OrderEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(created, that.created) && Objects.equals(started, that.started) && Objects.equals(picks, that.picks) && Objects.equals(nextPick, that.nextPick) && Objects.equals(done, that.done);
+        return Objects.equals(id, that.id) && Objects.equals(created, that.created) && Objects.equals(started, that.started) && Objects.equals(picks, that.picks) && Objects.equals(done, that.done) && Objects.equals(deviceId, that.deviceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, created, started, picks, nextPick, done);
+        return Objects.hash(id, created, started, picks, done, deviceId);
     }
 
     @Override
@@ -160,8 +151,8 @@ public class OrderEntity {
                 ", created=" + created +
                 ", started=" + started +
                 ", picks=" + picks +
-                ", nextPick=" + nextPick +
                 ", done=" + done +
+                ", deviceId='" + deviceId + '\'' +
                 '}';
     }
 }

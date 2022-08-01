@@ -1,6 +1,7 @@
 package com.petwal.rest.controller;
 
 import com.petwal.rest.model.ApiOrder;
+import com.petwal.rest.model.request.ApiDeviceRequest;
 import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,11 @@ public class OrderController {
     @PostMapping("/pick")
     public void pick(@RequestBody final ApiOrderRequest apiOrderRequest) {
         apiOrderService.pickOrderItem(apiOrderRequest);
+    }
+
+    @PostMapping("/new")
+    public void startNewOrder(@RequestBody final ApiDeviceRequest deviceRequest) {
+
+        apiOrderService.startNewOrder(deviceRequest);
     }
 }

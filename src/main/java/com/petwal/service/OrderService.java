@@ -22,4 +22,8 @@ public class OrderService {
     public void pickOrderItem(final String orderId, final String pickId, final int amount) {
         orderRepository.pickOrderItem(orderId, pickId, amount);
     }
+
+    public void startNewOrder(final String deviceId) {
+        orderRepository.startNewOrder(deviceId);
+    }
 }

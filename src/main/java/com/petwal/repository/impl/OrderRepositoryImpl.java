@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -25,6 +27,22 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
         Optional.ofNullable(entityManager.find(OrderEntity.class, orderId))
                         .ifPresent(orderEntity -> pickItemFromOrder(orderEntity, pickId, amountToPick));
+    }
+
+    @Override
+    @Transactional
+    public void startNewOrder(final String deviceId) {
+
+        final TypedQuery<OrderEntity> query = entityManager.createQuery("SELECT order FROM OrderEntity order WHERE order.deviceId is null", OrderEntity.class);
+        final List<OrderEntity> resultList = query.getResultList();
+
+        if(!resultList.isEmpty()) {
+
+            final int randomPos = (int) (Math.random() * resultList.size());
+            final OrderEntity orderEntity = resultList.get(randomPos);
+            orderEntity.setDeviceId(deviceId);
+            entityManager.persist(orderEntity);
+        }
     }
 
     private void pickItemFromOrder(final OrderEntity orderEntity, final String pickId, final int amountToPick) {

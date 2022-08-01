@@ -11,7 +11,7 @@ public class ItemEntity {
     @Id
     private String id;
     private String name;
-    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private ItemTypeEntity itemType;
 
