@@ -10,8 +10,7 @@ import static com.petwal.util.Validation.checkNotNull;
 public class PickEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     @JoinColumn()
     @OneToOne(fetch = FetchType.EAGER)
     private ItemEntity item;
@@ -25,29 +24,20 @@ public class PickEntity {
     private PickEntity() {
     }
 
-    private PickEntity(final Long id, final ItemEntity item, final OrderEntity order, final Integer quantity,
-                       final Integer picked, final Boolean done) {
-        this.id = checkNotNull(id, "pickId");
-        this.item = checkNotNull(item, "item");
-        this.order = checkNotNull(order, "order");
-        this.quantity = checkNotNull(quantity, "quantity");
-        this.picked = checkNotNull(picked, "picked");
-        this.done = checkNotNull(done, "done");
-    }
-
     private PickEntity(final Builder builder) {
-        setId(builder.pickId);
-        setItem(builder.item);
-        setOrder(builder.order);
-        setQuantity(builder.quantity);
-        setPicked(builder.picked);
+        this.id = checkNotNull(builder.id, "pickId");
+        this.item = checkNotNull(builder.item, "item");
+        this.order = checkNotNull(builder.order, "order");
+        this.quantity = checkNotNull(builder.quantity, "quantity");
+        this.picked = checkNotNull(builder.picked, "picked");
+        this.done = checkNotNull(builder.done, "done");
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    private void setId(final Long id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -55,7 +45,7 @@ public class PickEntity {
         return item;
     }
 
-    private void setItem(final ItemEntity item) {
+    public void setItem(final ItemEntity item) {
         this.item = item;
     }
 
@@ -63,7 +53,7 @@ public class PickEntity {
         return order;
     }
 
-    private void setOrder(final OrderEntity order) {
+    public void setOrder(final OrderEntity order) {
         this.order = order;
     }
 
@@ -71,7 +61,7 @@ public class PickEntity {
         return quantity;
     }
 
-    private void setQuantity(final Integer quantity) {
+    public void setQuantity(final Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -79,7 +69,7 @@ public class PickEntity {
         return picked;
     }
 
-    private void setPicked(final Integer picked) {
+    public void setPicked(final Integer picked) {
         this.picked = picked;
     }
 
@@ -91,12 +81,12 @@ public class PickEntity {
         return done;
     }
 
-    private void setDone(final Boolean done) {
+    public void setDone(final Boolean done) {
         this.done = done;
     }
 
     public static final class Builder {
-        private Long pickId;
+        private String id;
         private ItemEntity item;
         private OrderEntity order;
         private Integer quantity;
@@ -106,8 +96,8 @@ public class PickEntity {
         private Builder() {
         }
 
-        public Builder pickId(final Long pickId) {
-            this.pickId = pickId;
+        public Builder id(final String id) {
+            this.id = id;
             return this;
         }
 

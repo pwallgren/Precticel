@@ -46,7 +46,7 @@ public class OrderEntity {
         return id;
     }
 
-    private void setId(final String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -54,7 +54,7 @@ public class OrderEntity {
         return created;
     }
 
-    private void setCreated(final Instant created) {
+    public void setCreated(final Instant created) {
         this.created = created;
     }
 
@@ -62,7 +62,7 @@ public class OrderEntity {
         return started;
     }
 
-    private void setStarted(final Instant started) {
+    public void setStarted(final Instant started) {
         this.started = started;
     }
 
@@ -70,7 +70,7 @@ public class OrderEntity {
         return picks;
     }
 
-    private void setPicks(final List<PickEntity> picks) {
+    public void setPicks(final List<PickEntity> picks) {
         this.picks = picks;
     }
 
@@ -78,7 +78,7 @@ public class OrderEntity {
         return nextPick;
     }
 
-    private void setNextPick(final Integer nextPick) {
+    public void setNextPick(final Integer nextPick) {
         this.nextPick = nextPick;
     }
 
@@ -86,7 +86,7 @@ public class OrderEntity {
         return done;
     }
 
-    private void setDone(final Boolean done) {
+    public void setDone(final Boolean done) {
         this.done = done;
     }
 

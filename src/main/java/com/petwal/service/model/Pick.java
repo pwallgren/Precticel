@@ -6,7 +6,7 @@ import static com.petwal.util.Validation.checkNotNull;
 
 public class Pick {
 
-    private Long id;
+    private String id;
     private Item item;
     private Integer quantity;
     private Integer picked;
@@ -23,7 +23,7 @@ public class Pick {
         done = checkNotNull(builder.done, "done");
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,7 +48,7 @@ public class Pick {
     }
 
     public static final class Builder {
-        private Long id;
+        private String id;
         private Item item;
         private Integer quantity;
         private Integer picked;
@@ -57,7 +57,7 @@ public class Pick {
         private Builder() {
         }
 
-        public Builder id(final Long id) {
+        public Builder id(final String id) {
             this.id = id;
             return this;
         }
