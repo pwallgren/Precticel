@@ -45,6 +45,7 @@ public class DomainToApi {
         return ApiItem.builder()
                 .id(item.getId())
                 .name(item.getName())
+                .quantity(item.getQuantity())
                 .itemType(convert(item.getItemType()))
                 .build();
     }

@@ -45,6 +45,7 @@ public class EntityToDomain {
         return Item.builder()
                 .id(itemEntity.getId())
                 .name(itemEntity.getName())
+                .quantity(itemEntity.getQuantity())
                 .itemType(convert(itemEntity.getItemType()))
                 .build();
     }

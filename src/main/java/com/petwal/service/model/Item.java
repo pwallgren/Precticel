@@ -8,15 +8,17 @@ public class Item {
 
     private String id;
     private String name;
+    private Integer quantity;
     private ItemType itemType;
 
     private Item() {
     }
 
     private Item(final Builder builder) {
-        id = checkNotNull(builder.id, "id");
-        name = checkNotNull(builder.name, "name");
-        itemType = checkNotNull(builder.itemType, "itemType");
+        this.id = checkNotNull(builder.id, "id");
+        this.name = checkNotNull(builder.name, "name");
+        this.quantity = checkNotNull(builder.quantity, "quantity");
+        this.itemType = checkNotNull(builder.itemType, "itemType");
     }
 
     public String getId() {
@@ -25,6 +27,10 @@ public class Item {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
     }
 
     public ItemType getItemType() {
@@ -38,6 +44,7 @@ public class Item {
     public static final class Builder {
         private String id;
         private String name;
+        private Integer quantity;
         private ItemType itemType;
 
         private Builder() {
@@ -50,6 +57,11 @@ public class Item {
 
         public Builder name(final String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder quantity(final Integer quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -68,12 +80,12 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(itemType, item.itemType);
+        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(quantity, item.quantity) && Objects.equals(itemType, item.itemType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, itemType);
+        return Objects.hash(id, name, quantity, itemType);
     }
 
     @Override
@@ -81,6 +93,7 @@ public class Item {
         return "Item{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", quantity=" + quantity +
                 ", itemType=" + itemType +
                 '}';
     }

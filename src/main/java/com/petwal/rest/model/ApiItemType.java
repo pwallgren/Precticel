@@ -21,16 +21,8 @@ public class ApiItemType {
         return id;
     }
 
-    private void setId(final String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    private void setName(final String name) {
-        this.name = name;
     }
 
     public static ApiItemType of(final String id, final String name) {

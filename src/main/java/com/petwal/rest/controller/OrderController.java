@@ -26,19 +26,23 @@ public class OrderController {
     }
 
     @PostMapping("/pick")
-    public void pick(@RequestBody final ApiOrderRequest apiOrderRequest) {
+    public ResponseEntity<Void> pick(@RequestBody final ApiOrderRequest apiOrderRequest) {
+
         apiOrderService.pickOrderItem(apiOrderRequest);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/start-random")
-    public void startNewOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
+    public ResponseEntity<Void> startNewOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
 
         apiOrderService.startNewOrder(startOrderRequest);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/start-specific")
-    public void startSpecificOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
+    public ResponseEntity<Void> startSpecificOrder(@RequestBody final ApiStartOrderRequest startOrderRequest) {
 
         apiOrderService.startSpecificOrder(startOrderRequest);
+        return ResponseEntity.ok().build();
     }
 }

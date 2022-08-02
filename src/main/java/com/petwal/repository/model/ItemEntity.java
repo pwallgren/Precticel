@@ -1,6 +1,7 @@
 package com.petwal.repository.model;
 
 import javax.persistence.*;
+
 import java.util.Objects;
 
 import static com.petwal.util.Validation.checkNotNull;
@@ -11,6 +12,7 @@ public class ItemEntity {
     @Id
     private String id;
     private String name;
+    private Integer quantity;
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private ItemTypeEntity itemType;
@@ -29,7 +31,7 @@ public class ItemEntity {
         return id;
     }
 
-    private void setId(final String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -37,7 +39,7 @@ public class ItemEntity {
         return name;
     }
 
-    private void setName(final String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -45,8 +47,22 @@ public class ItemEntity {
         return itemType;
     }
 
-    private void setItemType(final ItemTypeEntity itemType) {
+    public void setItemType(final ItemTypeEntity itemType) {
         this.itemType = itemType;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(final Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void decreaseQuantity(final int q) {
+        if(q > 0 && this.quantity >= q) {
+            this.quantity -= q;
+        }
     }
 
     public static Builder builder() {
@@ -56,6 +72,7 @@ public class ItemEntity {
     public static final class Builder {
         private String id;
         private String name;
+        private Integer quantity;
         private ItemTypeEntity itemType;
 
         private Builder() {
@@ -68,6 +85,11 @@ public class ItemEntity {
 
         public Builder name(final String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder quantity(final Integer quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -86,12 +108,12 @@ public class ItemEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ItemEntity that = (ItemEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(itemType, that.itemType);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(quantity, that.quantity) && Objects.equals(itemType, that.itemType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, itemType);
+        return Objects.hash(id, name, quantity, itemType);
     }
 
     @Override
@@ -99,6 +121,7 @@ public class ItemEntity {
         return "ItemEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", quantity=" + quantity +
                 ", itemType=" + itemType +
                 '}';
     }

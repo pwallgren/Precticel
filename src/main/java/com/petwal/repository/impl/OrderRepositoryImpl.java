@@ -55,8 +55,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     private List<OrderEntity> getAllInactiveOrders() {
 
         final TypedQuery<OrderEntity> query = entityManager.createQuery("SELECT order FROM OrderEntity order WHERE order.deviceId is null", OrderEntity.class);
-        final List<OrderEntity> resultList = query.getResultList();
-        return resultList;
+        return query.getResultList();
     }
 
     private void pickItemFromOrder(final OrderEntity orderEntity, final String pickId, final int amountToPick) {
@@ -71,11 +70,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     private void performPick(final OrderEntity orderEntity, final PickEntity pick, final int amountToPick) {
 
-        pick.setPicked(pick.getPicked() + amountToPick);
-
-        if (Objects.equals(pick.getPicked(), pick.getQuantity())) {
-            pick.setDone(TRUE);
-        }
+        pick.makePick(amountToPick);
+        pick.getItem().decreaseQuantity(amountToPick);
 
         if (allPicksDone(orderEntity)) {
             orderEntity.setDone(TRUE);
@@ -97,8 +93,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     private boolean isValidAmount(final PickEntity pick, final int amountToPick) {
 
-        final int amountLeft = pick.getQuantity() - pick.getPicked();
-        return amountToPick > 0 && amountLeft >= amountToPick;
+        final int pickAmountLeft = pick.getQuantity() - pick.getPicked();
+        return amountToPick > 0 && pickAmountLeft >= amountToPick && pick.getItem().getQuantity() >= amountToPick;
     }
 
 }

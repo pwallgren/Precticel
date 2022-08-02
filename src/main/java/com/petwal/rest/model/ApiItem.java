@@ -8,6 +8,7 @@ public class ApiItem {
 
     private String id;
     private String name;
+    private Integer quantity;
     private ApiItemType itemType;
 
     private ApiItem() {
@@ -16,6 +17,7 @@ public class ApiItem {
     private ApiItem(final Builder builder) {
         this.id = checkNotNull(builder.id, "id");
         this.name = checkNotNull(builder.name, "name");
+        this.quantity = checkNotNull(builder.quantity, "quantity");
         this.itemType = checkNotNull(builder.itemType, "itemType");
     }
 
@@ -23,24 +25,16 @@ public class ApiItem {
         return id;
     }
 
-    private void setId(final String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    private void setName(final String name) {
-        this.name = name;
+    public Integer getQuantity() {
+        return quantity;
     }
 
     public ApiItemType getItemType() {
         return itemType;
-    }
-
-    public void setItemType(final ApiItemType itemType) {
-        this.itemType = itemType;
     }
 
     public static Builder builder() {
@@ -50,6 +44,7 @@ public class ApiItem {
     public static final class Builder {
         private String id;
         private String name;
+        private Integer quantity;
         private ApiItemType itemType;
 
         private Builder() {
@@ -62,6 +57,11 @@ public class ApiItem {
 
         public Builder name(final String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder quantity(final Integer quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -80,12 +80,12 @@ public class ApiItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ApiItem apiItem = (ApiItem) o;
-        return Objects.equals(id, apiItem.id) && Objects.equals(name, apiItem.name) && Objects.equals(itemType, apiItem.itemType);
+        return Objects.equals(id, apiItem.id) && Objects.equals(name, apiItem.name) && Objects.equals(quantity, apiItem.quantity) && Objects.equals(itemType, apiItem.itemType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, itemType);
+        return Objects.hash(id, name, quantity, itemType);
     }
 
     @Override
@@ -93,6 +93,7 @@ public class ApiItem {
         return "ApiItem{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", quantity=" + quantity +
                 ", itemType=" + itemType +
                 '}';
     }

@@ -25,7 +25,7 @@ public class ItemTypeEntity {
         return id;
     }
 
-    private void setId(final String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class ItemTypeEntity {
         return name;
     }
 
-    private void setName(final String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

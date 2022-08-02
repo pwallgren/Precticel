@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 import static com.petwal.util.Validation.checkNotNull;
+import static java.lang.Boolean.TRUE;
 
 @Entity
 public class PickEntity {
@@ -83,6 +84,18 @@ public class PickEntity {
 
     public void setDone(final Boolean done) {
         this.done = done;
+    }
+
+    public void makePick(final int amount) {
+
+        final int pickAmountLeft = this.quantity - this.picked;
+        if (amount > 0 && pickAmountLeft >= amount) {
+            this.picked += amount;
+
+            if (Objects.equals(this.picked, this.quantity)) {
+                this.done = TRUE;
+            }
+        }
     }
 
     public static final class Builder {

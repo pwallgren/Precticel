@@ -25,54 +25,31 @@ public class ApiOrder {
         started = checkNotNull(builder.started, "started");
         picks = checkNotEmpty(builder.picks, "picks");
         done = checkNotNull(builder.done, "done");
+        deviceId = checkNotNull(builder.deviceId, "deviceId");
     }
 
     public String getId() {
         return id;
     }
 
-    private void setId(final String id) {
-        this.id = id;
-    }
-
     public Instant getCreated() {
         return created;
-    }
-
-    private void setCreated(final Instant created) {
-        this.created = created;
     }
 
     public Instant getStarted() {
         return started;
     }
 
-    private void setStarted(final Instant started) {
-        this.started = started;
-    }
-
     public List<ApiPick> getPicks() {
         return picks;
-    }
-
-    private void setPicks(final List<ApiPick> picks) {
-        this.picks = picks;
     }
 
     public Boolean getDone() {
         return done;
     }
 
-    private void setDone(final Boolean done) {
-        this.done = done;
-    }
-
     public String getDeviceId() {
         return deviceId;
-    }
-
-    private void setDeviceId(final String deviceId) {
-        this.deviceId = deviceId;
     }
 
     public static Builder builder() {
