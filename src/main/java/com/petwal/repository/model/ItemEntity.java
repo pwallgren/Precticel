@@ -1,20 +1,23 @@
 package com.petwal.repository.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
-
 import java.util.Objects;
-
-import static com.petwal.util.Validation.checkNotNull;
 
 @Entity
 public class ItemEntity {
 
     @Id
+    @NotNull
     private String id;
+    @NotNull
     private String name;
+    @NotNull
     private Integer quantity;
     @JoinColumn(name = "item_type_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
     private ItemTypeEntity itemType;
 
 
@@ -22,9 +25,9 @@ public class ItemEntity {
     }
 
     private ItemEntity(final Builder builder) {
-        this.id = checkNotNull(builder.id, "id");
-        this.name = checkNotNull(builder.name, "name");
-        this.itemType = checkNotNull(builder.itemType, "itemType");
+        this.id = builder.id;
+        this.name = builder.name;
+        this.itemType = builder.itemType;
     }
 
     public String getId() {

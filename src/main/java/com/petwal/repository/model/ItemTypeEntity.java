@@ -1,24 +1,26 @@
 package com.petwal.repository.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
-
-import static com.petwal.util.Validation.checkNotNull;
 
 @Entity
 public class ItemTypeEntity {
 
     @Id
+    @NotNull
     private String id;
+    @NotNull
     private String name;
 
     private ItemTypeEntity() {
     }
 
     private ItemTypeEntity(final String id, final String name) {
-        this.id = checkNotNull(id, "id");
-        this.name = checkNotNull(name, "name");
+        this.id = id;
+        this.name = name;
     }
 
     public String getId() {

@@ -1,12 +1,15 @@
 package com.petwal.service;
 
-import com.petwal.repository.PickRepository;
 import com.petwal.repository.OrderRepository;
+import com.petwal.repository.PickRepository;
 import com.petwal.repository.model.OrderEntity;
 import com.petwal.repository.model.PickEntity;
 import com.petwal.service.converter.EntityToDomain;
+import com.petwal.service.converter.RequestToEntity;
 import com.petwal.service.model.Order;
+import com.petwal.service.model.request.OrderRequest;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,6 +33,14 @@ public class OrderService {
                 .map(EntityToDomain::convert);
     }
 
+    public void createOrder(final OrderRequest orderRequest) {
+
+        final OrderEntity orderEntity = RequestToEntity.convert(orderRequest);
+        pickRepository.saveAll(orderEntity.getPicks());
+        orderRepository.save(orderEntity);
+
+    }
+
     public void pickOrderItem(final String orderId, final String pickId, final String deviceId, final int amount) {
 
         orderRepository.findById(orderId)
@@ -45,20 +56,20 @@ public class OrderService {
 
             final int randomPos = (int) (Math.random() * resultList.size());
             final OrderEntity orderEntity = resultList.get(randomPos);
-            orderEntity.setDeviceId(deviceId);
-            orderRepository.save(orderEntity);
+            startOrder(orderEntity, deviceId);
         }
     }
 
     public void startSpecificOrder(final String deviceId, final String orderId) {
 
         orderRepository.findById(orderId)
-                .ifPresent(order -> updateOrderWithDeviceId(order, deviceId));
+                .ifPresent(order -> startOrder(order, deviceId));
     }
 
-    private void updateOrderWithDeviceId(final OrderEntity orderEntity, final String deviceId) {
+    private void startOrder(final OrderEntity orderEntity, final String deviceId) {
 
         orderEntity.setDeviceId(deviceId);
+        orderEntity.setStarted(Instant.now());
         orderRepository.save(orderEntity);
     }
 

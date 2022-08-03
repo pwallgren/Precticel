@@ -1,48 +1,29 @@
 package com.petwal.rest.model.request;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class ApiOrderRequest implements Serializable {
 
-    private String orderId;
-    private String pickId;
+    private String id;
+    private List<ApiPickRequest> picks;
     private String deviceId;
-    private Integer amount;
 
     private ApiOrderRequest() {
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return id;
     }
 
-    private void setOrderId(final String orderId) {
-        this.orderId = orderId;
+    public List<ApiPickRequest> getPicks() {
+        return picks;
     }
 
-    public String getPickId() {
-        return pickId;
-    }
-
-    private void setPickId(final String pickId) {
-        this.pickId = pickId;
-    }
 
     public String getDeviceId() {
         return deviceId;
-    }
-
-    private void setDeviceId(final String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    private void setAmount(final Integer amount) {
-        this.amount = amount;
     }
 
     @Override
@@ -50,21 +31,20 @@ public class ApiOrderRequest implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final ApiOrderRequest that = (ApiOrderRequest) o;
-        return Objects.equals(orderId, that.orderId) && Objects.equals(pickId, that.pickId) && Objects.equals(deviceId, that.deviceId) && Objects.equals(amount, that.amount);
+        return Objects.equals(id, that.id) && Objects.equals(picks, that.picks) && Objects.equals(deviceId, that.deviceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, pickId, deviceId, amount);
+        return Objects.hash(id, picks, deviceId);
     }
 
     @Override
     public String toString() {
         return "ApiOrderRequest{" +
-                "orderId='" + orderId + '\'' +
-                ", pickId='" + pickId + '\'' +
+                "id='" + id + '\'' +
+                ", picks=" + picks +
                 ", deviceId='" + deviceId + '\'' +
-                ", amount=" + amount +
                 '}';
     }
 }

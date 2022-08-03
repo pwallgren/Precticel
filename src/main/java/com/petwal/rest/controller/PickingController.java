@@ -1,19 +1,19 @@
 package com.petwal.rest.controller;
 
 import com.petwal.rest.model.ApiOrder;
+import com.petwal.rest.model.request.ApiPerformPickRequest;
 import com.petwal.rest.model.request.ApiStartOrderRequest;
-import com.petwal.rest.model.request.ApiOrderRequest;
 import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "order")
-public class OrderController {
+@RequestMapping(value = "picking")
+public class PickingController {
 
     private final ApiOrderService apiOrderService;
 
-    public OrderController(final ApiOrderService apiOrderService) {
+    public PickingController(final ApiOrderService apiOrderService) {
         this.apiOrderService = apiOrderService;
     }
 
@@ -26,9 +26,9 @@ public class OrderController {
     }
 
     @PostMapping("/pick")
-    public ResponseEntity<Void> pick(@RequestBody final ApiOrderRequest apiOrderRequest) {
+    public ResponseEntity<Void> pick(@RequestBody final ApiPerformPickRequest pickRequest) {
 
-        apiOrderService.pickOrderItem(apiOrderRequest);
+        apiOrderService.pickOrderItem(pickRequest);
         return ResponseEntity.ok().build();
     }
 

@@ -1,37 +1,43 @@
 package com.petwal.repository.model;
 
-import javax.persistence.*;
+import com.sun.istack.NotNull;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-import static com.petwal.util.Validation.checkNotNull;
 import static java.lang.Boolean.TRUE;
 
 @Entity
 public class PickEntity {
 
     @Id
+    @NotNull
     private String id;
     @JoinColumn()
     @OneToOne(fetch = FetchType.EAGER)
+    @NotNull
     private ItemEntity item;
     @JoinColumn()
     @OneToOne(fetch = FetchType.EAGER)
+    @NotNull
     private OrderEntity order;
+    @NotNull
     private Integer quantity;
+    @NotNull
     private Integer picked;
+    @NotNull
     private Boolean done;
 
     private PickEntity() {
     }
 
     private PickEntity(final Builder builder) {
-        this.id = checkNotNull(builder.id, "pickId");
-        this.item = checkNotNull(builder.item, "item");
-        this.order = checkNotNull(builder.order, "order");
-        this.quantity = checkNotNull(builder.quantity, "quantity");
-        this.picked = checkNotNull(builder.picked, "picked");
-        this.done = checkNotNull(builder.done, "done");
+        this.id = builder.id;
+        this.item = builder.item;
+        this.order = builder.order;
+        this.quantity = builder.quantity;
+        this.picked = builder.picked;
+        this.done = builder.done;
     }
 
     public String getId() {

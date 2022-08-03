@@ -1,23 +1,25 @@
 package com.petwal.repository.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
-import static com.petwal.util.Validation.checkNotEmpty;
-import static com.petwal.util.Validation.checkNotNull;
-
 @Entity
 public class OrderEntity {
 
     @Id
+    @NotNull
     private String id;
+    @NotNull
     private Instant created;
     private Instant started;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @OneToMany(fetch = FetchType.EAGER)
     private List<PickEntity> picks;
+    @NotNull
     private Boolean done;
     private String deviceId;
 
@@ -25,12 +27,12 @@ public class OrderEntity {
     }
 
     public OrderEntity(final Builder builder) {
-        this.id = checkNotNull(builder.id, "id");
-        this.created = checkNotNull(builder.created, "created");
-        this.started = checkNotNull(builder.started, "started");
-        this.picks = checkNotEmpty(builder.picks, "pics");
-        this.done = checkNotNull(builder.done, "done");
-        this.deviceId = checkNotNull(builder.deviceId, "deviceId");
+        this.id = builder.id;
+        this.created = builder.created;
+        this.started = builder.started;
+        this.picks = builder.picks;
+        this.done = builder.done;
+        this.deviceId = builder.deviceId;
     }
 
     public String getId() {
