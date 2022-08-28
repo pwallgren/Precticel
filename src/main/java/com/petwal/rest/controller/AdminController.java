@@ -6,6 +6,9 @@ import com.petwal.rest.service.ApiOrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+
 @RestController
 @RequestMapping(value = "admin")
 public class AdminController {
@@ -27,7 +30,7 @@ public class AdminController {
     @PostMapping("/order")
     public ResponseEntity<Void> createOrder(@RequestBody final ApiOrderRequest orderRequest) {
 
-        apiOrderService.createNewOrder(orderRequest);
+        CompletableFuture.runAsync(() -> apiOrderService.createNewOrder(orderRequest), Executors.newSingleThreadExecutor());
         return ResponseEntity.ok().build();
     }
 }
